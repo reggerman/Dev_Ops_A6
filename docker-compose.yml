@@ -2,7 +2,7 @@
 services:
 
   mongo:
-    image: mongo:6
+    image: mongo:4.4
     restart: always
     volumes:
       - mongo_data:/data/db
@@ -35,6 +35,8 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"  # Main entry point for all traffic
+    environment:
+      - BACKEND==http://backend:5000
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./studentportfolio:/usr/share/nginx/html:ro
